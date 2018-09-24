@@ -122,11 +122,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4244175938733068, guid: 8326ce0de2ce0774fac9d4f754454b55, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.8
+      value: -1.9
       objectReference: {fileID: 0}
     - target: {fileID: 4244175938733068, guid: 8326ce0de2ce0774fac9d4f754454b55, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -5.95
+      value: -5.48
       objectReference: {fileID: 0}
     - target: {fileID: 4244175938733068, guid: 8326ce0de2ce0774fac9d4f754454b55, type: 2}
       propertyPath: m_LocalPosition.z
@@ -162,6 +162,14 @@ Prefab:
       propertyPath: planetSpawner
       value: 
       objectReference: {fileID: 583868069}
+    - target: {fileID: 4234789955205180, guid: 8326ce0de2ce0774fac9d4f754454b55, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4234789955205180, guid: 8326ce0de2ce0774fac9d4f754454b55, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8326ce0de2ce0774fac9d4f754454b55, type: 2}
   m_IsPrefabAsset: 0

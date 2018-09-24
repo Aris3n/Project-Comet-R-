@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 		_planet.DisableEntryPoint();
 		transform.position = (transform.position - _planet.transform.position).normalized * 
 		_planet.orbitRadius + _planet.transform.position;
-		transform.rotation = Quaternion.identity;
+ 		transform.up = _planet.transform.position - transform.position;
 	}
 	public void ExitOrbit () {
 		Quaternion originalRotation = transform.rotation;
