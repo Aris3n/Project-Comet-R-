@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void Fly (float _speed) {
-			transform.position += transform.up * Time.deltaTime * 10;
+			transform.position += transform.up * Time.deltaTime * _speed;
 	}
 
 	public void Orbit (Planet _planet, float _speed) {
