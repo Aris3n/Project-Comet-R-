@@ -17,4 +17,8 @@ public class Planet : MonoBehaviour {
 	public void GravityDecay(float orbitSpeedPercentage) {
 		orbitRadius = orbitSpeedPercentage * maxOrbitRadius;
 	}
+
+	void OnBecameInvisible() {
+         Destroy(gameObject);
+     }
 }

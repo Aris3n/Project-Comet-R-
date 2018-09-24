@@ -19,7 +19,6 @@ public class Player : MonoBehaviour {
 	public float moveSpeedDecayRate;
 	[SerializeField]
 	private float moveSpeed;
-
 	public float orbitToSpeedRatio;
 
 	private void Start () {
@@ -34,7 +33,6 @@ public class Player : MonoBehaviour {
 			planet = null;
 			controller.ExitOrbit();
 			currentState = States.Flying;	
-			Debug.Log("Leaving current orbit");
 		}
 
 		UpdateMovement();
@@ -50,9 +48,8 @@ public class Player : MonoBehaviour {
 				planet.GravityDecay(currentOrbitSpeed / maxOrbitSpeed);
 				break;
 			case States.Flying:
-				moveSpeed = (launchSpeed -=moveSpeedDecayRate) / 2;
+				moveSpeed = (launchSpeed -=moveSpeedDecayRate) / 4;
 				if (moveSpeed  > 0) {
-					Debug.Log ("Fly Speeed: " + moveSpeed);
 					controller.Fly(moveSpeed -= moveSpeedDecayRate);
 				}
 				else {
@@ -67,16 +64,14 @@ public class Player : MonoBehaviour {
 			planet = collider.GetComponent<Planet>();
 			controller.EnterOrbit(planet);
 			currentState = States.Orbiting;
-			currentOrbitSpeed = maxOrbitSpeed;
-			
-			Debug.Log("Player has entered new orbit");
+			currentOrbitSpeed = maxOrbitSpeed;			
 		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Planet") {	
-			Debug.Log("Player collided with planet");
+			//Debug.Log("Player collided with planet");
 		}
     }
 }

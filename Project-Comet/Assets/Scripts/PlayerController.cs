@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
 		_planet.DisableEntryPoint();
 		transform.position = (transform.position - _planet.transform.position).normalized * 
 		_planet.orbitRadius + _planet.transform.position;
+		transform.rotation = Quaternion.identity;
 	}
 	public void ExitOrbit () {
 		Quaternion originalRotation = transform.rotation;
@@ -33,7 +34,5 @@ public class PlayerController : MonoBehaviour {
 		transform.RotateAround (_planet.transform.position, _planet.Axis, _speed * Time.deltaTime);
     	Vector3 desiredPosition = (transform.position - _planet.transform.position).normalized * _planet.orbitRadius + _planet.transform.position;
     	transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * _planet.orbitRadiusSpeed);
-
-		Debug.Log("Player is orbiting");
 	}
 }
