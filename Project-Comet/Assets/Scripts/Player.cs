@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
 
     private void Death()
     {
-        //FinalizeScore();
+        FinalizeScore();
         CanvasGroup gameCanvasGroup = GameObject.Find("GameCanvas").GetComponent<CanvasGroup>();
         canvasManager.ShowCanvas(gameCanvasGroup, gameOverCanvas);
     }

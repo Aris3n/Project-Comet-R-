@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance = null;
     private TextMeshProUGUI scoreText;
     private int score;
     private int highScore;
@@ -18,6 +19,10 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
         DontDestroyOnLoad(this.gameObject);
         Screen.orientation = ScreenOrientation.Portrait;
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -55,6 +60,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        highScore = PlayerPrefs.GetInt("Highscore", 0);
         if (scene.name == "Game")
         {
             score = 0;
@@ -66,13 +72,14 @@ public class GameManager : MonoBehaviour
         }
         else if (scene.name == "MainMenu")
         {
-            UpdateScoreBoard(highScore);
+            UpdateMainMenu();
         }
     }
 
-    private void UpdateScoreBoard(int value)
+    private void UpdateMainMenu()
     {
-        GameObject.FindGameObjectWithTag("HighScore").GetComponent<TextMeshProUGUI>().text = value.ToString();
+        GameObject.Find("PlayButton").GetComponent<Button>().onClick.AddListener(StartGame);
+        GameObject.FindGameObjectWithTag("HighScore").GetComponent<TextMeshProUGUI>().text = highScore.ToString();
     }
 
     private void UpdateGameScoreUI(int value)
