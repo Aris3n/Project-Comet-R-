@@ -11,20 +11,25 @@ public class PlanetSpawner : MonoBehaviour
     private float xSpawnOffset;
     public GameObject planetPrefab;
 
-    public Vector3 GetSpawnPointPosition (int index) {
+    public Vector3 GetSpawnPointPosition(int index)
+    {
         return spawnPoints[index].position;
     }
 
-	private void Start () { 
-		xSpawnOffset = xSpawnOffsets[Random.Range(0, xSpawnOffsets.Length)];
-	}
+    private void Start()
+    {
+        xSpawnOffset = xSpawnOffsets[Random.Range(0, xSpawnOffsets.Length)];
+    }
 
-    public void SpawnPlanet() {
-        foreach (Transform spawnPoint in spawnPoints) {
-			float randomSpawnOffset = 0.0f;
-			do {
-				randomSpawnOffset = xSpawnOffsets[Random.Range(0, xSpawnOffsets.Length)];
-			} while (xSpawnOffset == randomSpawnOffset);
+    public void SpawnPlanet()
+    {
+        foreach (Transform spawnPoint in spawnPoints)
+        {
+            float randomSpawnOffset = 0.0f;
+            do
+            {
+                randomSpawnOffset = xSpawnOffsets[Random.Range(0, xSpawnOffsets.Length)];
+            } while (xSpawnOffset == randomSpawnOffset);
             xSpawnOffset = randomSpawnOffset;
             Vector3 spawnPosition = new Vector3(xSpawnOffset, spawnPoint.position.y, spawnPoint.position.z);
             Instantiate(planetPrefab, spawnPosition, Quaternion.identity);

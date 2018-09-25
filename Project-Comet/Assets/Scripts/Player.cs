@@ -42,9 +42,12 @@ public class Player : MonoBehaviour
         state = States.Orbiting;
     }
 
-    private void Update() {
-        if (Time.timeScale == 1) {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) {
+    private void Update()
+    {
+        if (Time.timeScale == 1)
+        {
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && state == States.Orbiting || Input.GetKeyDown(KeyCode.Space) && state == States.Orbiting)
+            {
                 currentPlanet = null;
                 controller.ExitOrbit();
                 state = States.Flying;
@@ -68,7 +71,11 @@ public class Player : MonoBehaviour
                 SetShipTrailSize((moveSpeed / launchSpeed));
                 if (moveSpeed > 0)
                     controller.Fly(moveSpeed -= moveSpeedDecayRate);
-                //Death condition in else here
+                else
+                {
+                    enabled = false;
+                    Death();
+                }
                 break;
         }
     }
@@ -99,7 +106,7 @@ public class Player : MonoBehaviour
     private void Death()
     {
         //FinalizeScore();
-        //CanvasGroup gameCanvasGroup = GameObject.Find("GameCanvas").GetComponent<CanvasGroup>();
-        //canvasManager.ShowCanvas(gameCanvasGroup, gameOverCanvas);
+        CanvasGroup gameCanvasGroup = GameObject.Find("GameCanvas").GetComponent<CanvasGroup>();
+        canvasManager.ShowCanvas(gameCanvasGroup, gameOverCanvas);
     }
 }

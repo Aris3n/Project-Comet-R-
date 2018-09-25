@@ -8,6 +8,8 @@ TagManager:
   - Ship
   - Score
   - Boundary
+  - HighScore
+  - AScore
   layers:
   - Default
   - TransparentFX
