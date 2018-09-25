@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 
 public class PlayerController : MonoBehaviour {
+
+	public bool isClockwiseOrbit = true;
 	
 	void Start () {
 
@@ -19,23 +21,32 @@ public class PlayerController : MonoBehaviour {
 		_planet.DisableEntryPoint();
 		transform.position = (transform.position - _planet.transform.position).normalized * 
 		_planet.orbitRadius + _planet.transform.position;
- 		transform.up = _planet.transform.position - transform.position;
+		transform.up = _planet.transform.position - transform.position;
+		transform.GetChild(0).localRotation = Quaternion.identity;
+		if (isClockwiseOrbit) {
+			Debug.Log("Clockwise");
+			transform.GetChild(0).localRotation = Quaternion.Euler(0, 0, 90);
+		} else {
+			Debug.Log("not Clockwise");
+			transform.GetChild(0).localRotation = Quaternion.Euler(0, 0, -90);
+		}
 	}
-	public void ExitOrbit (bool _isClockwise) {
+	public void ExitOrbit () {
 		Quaternion originalRotation = transform.rotation;
-		if (_isClockwise) { 
+		if (isClockwiseOrbit) { 
 			transform.rotation = originalRotation * Quaternion.AngleAxis(90, Vector3.forward);
 		} else {
 			transform.rotation = originalRotation * Quaternion.AngleAxis(-90, Vector3.forward);
 		}
+		transform.GetChild(0).localRotation = Quaternion.identity;
 	}
 
 	public void Fly (float _speed) {
 			transform.position += transform.up * Time.deltaTime * _speed;
 	}
 
-	public void Orbit (Planet _planet, float _speed, bool _isClockwise) {
-		if (_isClockwise) {
+	public void Orbit (Planet _planet, float _speed) {
+		if (isClockwiseOrbit) {
 			transform.RotateAround (_planet.transform.position, -Vector3.forward, _speed * Time.deltaTime);
 		} else {
 			transform.RotateAround (_planet.transform.position, Vector3.forward, _speed * Time.deltaTime);

@@ -22,6 +22,9 @@ public class Player : MonoBehaviour {
 	private float moveSpeed;
 	public float orbitToSpeedRatio;
 
+	public delegate void UpdateScore(int value);
+	public static event UpdateScore ScoreUp;
+
 	private void Start () {
 		controller = GetComponent<PlayerController>();
 		controller.EnterOrbit(planet);
@@ -32,7 +35,7 @@ public class Player : MonoBehaviour {
 	private void Update () {	
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			planet = null;
-			controller.ExitOrbit(isClockwise);
+			controller.ExitOrbit();
 			currentState = States.Flying;	
 		}
 
@@ -42,7 +45,7 @@ public class Player : MonoBehaviour {
 	private void UpdateMovement () {
 		switch (currentState) {
 			case States.Orbiting:
-				controller.Orbit(planet, currentOrbitSpeed, isClockwise);
+				controller.Orbit(planet, currentOrbitSpeed);
 				if (currentOrbitSpeed > minOrbitSpeed) 
 					currentOrbitSpeed -= orbitDecayRate;
 				launchSpeed = currentOrbitSpeed / orbitToSpeedRatio;
@@ -63,12 +66,14 @@ public class Player : MonoBehaviour {
 	private void OnTriggerEnter2D (Collider2D collider) {
 		if (collider.tag == "Planet") {
 			planet = collider.GetComponent<Planet>();
-			controller.EnterOrbit(planet);
 			if (transform.position.x > planet.transform.position.x) {
-				isClockwise = true;
+				controller.isClockwiseOrbit = true;
 			} else {
-				isClockwise = false;
+				controller.isClockwiseOrbit = false;
 			}
+			controller.EnterOrbit(planet);
+			ScoreUp(1);
+			//Add score here
 			currentState = States.Orbiting;
 			currentOrbitSpeed = maxOrbitSpeed;			
 		}
