@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
 	public enum States { Flying, Orbiting }
 	public States currentState;
 	PlayerController controller;
+	public ParticleSystem shipTrail;
 	public Planet planet;
 	public bool isClockwise;
 	public float maxOrbitSpeed;
@@ -21,25 +22,33 @@ public class Player : MonoBehaviour {
 	[SerializeField]
 	private float moveSpeed;
 	public float orbitToSpeedRatio;
+	CanvasManager canvasManager;
+	public CanvasGroup gameOverCanvas;
 
 	public delegate void UpdateScore(int value);
 	public static event UpdateScore ScoreUp;
 
+	public delegate void PlayerDeath();
+	public static event PlayerDeath FinalizeScore;
+
 	private void Start () {
 		controller = GetComponent<PlayerController>();
+		canvasManager = GetComponent<CanvasManager>();
 		controller.EnterOrbit(planet);
-
 		currentOrbitSpeed = maxOrbitSpeed;
 	}
 	
 	private void Update () {	
-		if (Input.GetKeyDown(KeyCode.Space)) {
+		if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) {
 			planet = null;
 			controller.ExitOrbit();
 			currentState = States.Flying;	
 		}
 
 		UpdateMovement();
+		if (transform.position.x > 2) {
+
+		}
 	}
 
 	private void UpdateMovement () {
@@ -50,9 +59,11 @@ public class Player : MonoBehaviour {
 					currentOrbitSpeed -= orbitDecayRate;
 				launchSpeed = currentOrbitSpeed / orbitToSpeedRatio;
 				planet.GravityDecay(currentOrbitSpeed / maxOrbitSpeed);
+				shipTrail.startLifetime = (currentOrbitSpeed/maxOrbitSpeed) * 1;
 				break;
 			case States.Flying:
 				moveSpeed = (launchSpeed -=moveSpeedDecayRate) / 4;
+				shipTrail.startLifetime = (moveSpeed/launchSpeed) * 1;
 				if (moveSpeed  > 0) {
 					controller.Fly(moveSpeed -= moveSpeedDecayRate);
 				}
@@ -73,16 +84,24 @@ public class Player : MonoBehaviour {
 			}
 			controller.EnterOrbit(planet);
 			ScoreUp(1);
-			//Add score here
 			currentState = States.Orbiting;
 			currentOrbitSpeed = maxOrbitSpeed;			
+		} else if (collider.tag == "Boundary") {
+			Death();
 		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Planet") {	
-			//Debug.Log("Player collided with planet");
+			Death();
 		}
+		
     }
+
+	private void Death() {
+		FinalizeScore();
+		CanvasGroup gameCanvasGroup = GameObject.Find("GameCanvas").GetComponent<CanvasGroup>();
+		canvasManager.ShowCanvas(gameCanvasGroup, gameOverCanvas);
+	}
 }
