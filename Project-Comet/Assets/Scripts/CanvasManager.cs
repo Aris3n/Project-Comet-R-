@@ -39,7 +39,7 @@ public class CanvasManager : MonoBehaviour
         canvasGroup.blocksRaycasts = false;
     }
 
-    public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerpTime = 0.5f)
+    public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerpTime = 0.15f)
     {
         float _timeStrapedLerping = Time.time;
         float timeSinceStarted = Time.time - _timeStrapedLerping;

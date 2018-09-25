@@ -10,21 +10,25 @@ public class CameraFollow : MonoBehaviour {
 	public PlanetSpawner planetSpawner;
 
 	private void Start () {
-		pointForSpawn = planetSpawner.spawnPoints[1].transform.position;
-		planetSpawner.SpawnPlanet();
+		UpdateSpawner();
 	}
 
 	private void Update() {
-		if (transform.position.y >= pointForSpawn.y) {
-			pointForSpawn = planetSpawner.spawnPoints[1].transform.position;
-			planetSpawner.SpawnPlanet();
-		}
+		if (transform.position.y >= pointForSpawn.y)
+			UpdateSpawner();
 	}
-	void LateUpdate () {
+
+	private void LateUpdate () {
 		if (target.position.y > transform.position.y) {
 			Vector3 desiredPosition = new Vector3 (0, target.transform.position.y, zOffset);
 			Vector3 smoothPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
 			transform.position = smoothPosition;
 		}
 	}
+
+	private void UpdateSpawner () {
+		pointForSpawn = planetSpawner.GetSpawnPointPosition(1);
+		planetSpawner.SpawnPlanet();
+	}
+	
 }

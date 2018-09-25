@@ -1003,11 +1003,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 587193462}
   m_CullTransparentMesh: 0
---- !u!4 &641696656 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4043454131374908, guid: 44ef46785080c3b458048f8e38d3d762,
-    type: 2}
-  m_PrefabInternal: {fileID: 1316182695}
 --- !u!1 &663754243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,8 +1388,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 641696656}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1510,63 +1504,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1266319248}
   m_CullTransparentMesh: 0
---- !u!1001 &1316182695
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1220978043}
-    m_Modifications:
-    - target: {fileID: 4043454131374908, guid: 44ef46785080c3b458048f8e38d3d762, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4043454131374908, guid: 44ef46785080c3b458048f8e38d3d762, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -12.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4043454131374908, guid: 44ef46785080c3b458048f8e38d3d762, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4043454131374908, guid: 44ef46785080c3b458048f8e38d3d762, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4043454131374908, guid: 44ef46785080c3b458048f8e38d3d762, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4043454131374908, guid: 44ef46785080c3b458048f8e38d3d762, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4043454131374908, guid: 44ef46785080c3b458048f8e38d3d762, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4043454131374908, guid: 44ef46785080c3b458048f8e38d3d762, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198696791944673462, guid: 44ef46785080c3b458048f8e38d3d762,
-        type: 2}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.9842319
-      objectReference: {fileID: 0}
-    - target: {fileID: 198696791944673462, guid: 44ef46785080c3b458048f8e38d3d762,
-        type: 2}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.48584908
-      objectReference: {fileID: 0}
-    - target: {fileID: 198696791944673462, guid: 44ef46785080c3b458048f8e38d3d762,
-        type: 2}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 44ef46785080c3b458048f8e38d3d762, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &1373956442
 GameObject:
   m_ObjectHideFlags: 0

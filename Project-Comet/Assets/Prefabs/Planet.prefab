@@ -87,6 +87,9 @@ MonoBehaviour:
   maxOrbitRadius: 1.5
   orbitRadius: 0
   orbitRadiusSpeed: 1
+  maxOrbitSpeed: 200
+  minOrbitSpeed: 100
+  orbitSpeedDecayRate: 0.11
 --- !u!212 &212193661476154802
 SpriteRenderer:
   m_ObjectHideFlags: 1

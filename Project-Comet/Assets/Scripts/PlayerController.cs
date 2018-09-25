@@ -6,31 +6,31 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 
 public class PlayerController : MonoBehaviour {
-
 	public bool isClockwiseOrbit = true;
-	
-	void Start () {
-
-	}
-	
-	void FixedUpdate () {
-
-	}
 
 	public void EnterOrbit (Planet _planet) {
 		_planet.DisableEntryPoint();
 		transform.position = (transform.position - _planet.transform.position).normalized * 
 		_planet.orbitRadius + _planet.transform.position;
 		transform.up = _planet.transform.position - transform.position;
-		transform.GetChild(0).localRotation = Quaternion.identity;
-		if (isClockwiseOrbit) {
-			Debug.Log("Clockwise");
-			transform.GetChild(0).localRotation = Quaternion.Euler(0, 0, 90);
-		} else {
-			Debug.Log("not Clockwise");
-			transform.GetChild(0).localRotation = Quaternion.Euler(0, 0, -90);
-		}
+		RotateShipToOrbit();
 	}
+
+	public void SetRotationDirection(float planetXPosition) {
+		if (transform.position.x > planetXPosition)
+		isClockwiseOrbit = true;
+		else
+		isClockwiseOrbit = false;
+	}
+
+	private void RotateShipToOrbit() {
+		transform.GetChild(0).localRotation = Quaternion.identity;
+		if (isClockwiseOrbit) 
+			transform.GetChild(0).localRotation = Quaternion.Euler(0, 0, 90);
+		else 
+			transform.GetChild(0).localRotation = Quaternion.Euler(0, 0, -90);
+	}
+
 	public void ExitOrbit () {
 		Quaternion originalRotation = transform.rotation;
 		if (isClockwiseOrbit) { 
@@ -53,5 +53,6 @@ public class PlayerController : MonoBehaviour {
 		}
     	Vector3 desiredPosition = (transform.position - _planet.transform.position).normalized * _planet.orbitRadius + _planet.transform.position;
     	transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * _planet.orbitRadiusSpeed);
+		_planet.GravityDecay(_speed);
 	}
 }

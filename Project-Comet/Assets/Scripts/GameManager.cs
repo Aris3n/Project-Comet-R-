@@ -9,39 +9,64 @@ public class GameManager : MonoBehaviour {
 	private TextMeshProUGUI scoreText;
 	private int score;
 	private int highScore;
+
+	private Button pauseButton;
+	private Button resumeButton;
 	
 	void Awake () {
 		DontDestroyOnLoad(this.gameObject);
 		SceneManager.sceneLoaded += OnSceneLoaded;
-		PlayerPrefs.GetInt("Highscore", score);
+		//PlayerPrefs.GetInt("Highscore", score);
 	}
 	
-	void Update () {
-		
-	}
-
 	public void StartGame () {
 		SceneManager.LoadScene("Game", LoadSceneMode.Single);
 	}
 
-	public void OnSceneLoaded (Scene scene, LoadSceneMode mode) {
+	public void PauseGame () {
+		resumeButton.interactable = true;
+		pauseButton.interactable = false;
+		StartCoroutine(InitiatePause());
+	}
+
+	public void ResumeGame () {
+		resumeButton.interactable = false;
+		pauseButton.interactable = true;
+		Time.timeScale = 1f;
+	}
+
+	private void OnSceneLoaded (Scene scene, LoadSceneMode mode) {
 		if (scene.name == "Game") {
-			Debug.Log("In game");
-			scoreText = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
-			scoreText.text = " Score: " + score;
+			UpdateGameScoreUI(0);
+
+			pauseButton = GameObject.Find("PauseButton").GetComponent<Button>();
+			resumeButton = GameObject.Find("ResumeButton").GetComponent<Button>();
+			pauseButton.onClick.AddListener(PauseGame);
+			resumeButton.onClick.AddListener(ResumeGame);
 			Player.ScoreUp += AddScore;
-			Player.FinalizeScore += SaveScore;
+			//Player.FinalizeScore += SaveScore;
+		}
+	}
+
+	private void UpdateGameScoreUI(int value) {
+		score += value;
+		foreach (GameObject scoreText in GameObject.FindGameObjectsWithTag("Score")) {
+			scoreText.GetComponent<TextMeshProUGUI>().text = " Score: " + score;
 		}
 	}
 
 	private void AddScore (int value) {
-			score += value;
-			scoreText.text = "Score: " + score;
+			UpdateGameScoreUI(value);
 	}
 
 	private void SaveScore () {
 		if (score > highScore) {
 			PlayerPrefs.SetInt("Highscore", score);
 		} 
-	} 
+	}
+
+	 IEnumerator InitiatePause() {
+        yield return new WaitForSeconds(0.15f);
+		Time.timeScale = 0f;
+    }
 }

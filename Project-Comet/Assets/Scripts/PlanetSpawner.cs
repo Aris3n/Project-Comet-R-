@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class PlanetSpawner : MonoBehaviour
 {
-
-    public Transform[] spawnPoints;
-    public float[] xSpawnOffsets;
-    float xSpawnOffset;
+    [SerializeField]
+    private Transform[] spawnPoints;
+    [SerializeField]
+    private float[] xSpawnOffsets;
+    private float xSpawnOffset;
     public GameObject planetPrefab;
+
+    public Vector3 GetSpawnPointPosition (int index) {
+        return spawnPoints[index].position;
+    }
 
 	private void Start () { 
 		xSpawnOffset = xSpawnOffsets[Random.Range(0, xSpawnOffsets.Length)];
@@ -25,4 +30,6 @@ public class PlanetSpawner : MonoBehaviour
             Instantiate(planetPrefab, spawnPosition, Quaternion.identity);
         }
     }
+
+    //Add difficulty modifier here with planets that have harder prefabs interms of speed.
 }

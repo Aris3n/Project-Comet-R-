@@ -7,14 +7,29 @@ public class Planet : MonoBehaviour {
 	public float maxOrbitRadius;
 	public float orbitRadius;
 	public float orbitRadiusSpeed;
+	[SerializeField]
+	private float maxOrbitSpeed;
+	[SerializeField]
+	private float orbitSpeedDecayRate;
 
+	public float GetMaxOrbitSpeed() {
+		return maxOrbitSpeed;
+	}
+	public float GetOrbitSpeedDecayRate() {
+		return orbitSpeedDecayRate;
+	}
+	
+	public float GetOrbitSpeedPercantage (float orbitSpeed) {
+		return orbitSpeed/maxOrbitSpeed;
+	}
+	
 	public void DisableEntryPoint () {
 		GetComponent<CircleCollider2D>().enabled = false;
 		orbitRadius = maxOrbitRadius;
 	}
 
-	public void GravityDecay(float orbitSpeedPercentage) {
-		orbitRadius = orbitSpeedPercentage * maxOrbitRadius;
+	public void GravityDecay(float orbitSpeed) {
+		orbitRadius = GetOrbitSpeedPercantage(orbitSpeed) * maxOrbitRadius;
 	}
 
 	void OnBecameInvisible() {
