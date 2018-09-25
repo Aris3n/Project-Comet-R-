@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
 	public States currentState;
 	PlayerController controller;
 	public Planet planet;
+	public bool isClockwise;
 	public float maxOrbitSpeed;
 	public float minOrbitSpeed;
 	public float orbitDecayRate;
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour {
 	private void Update () {	
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			planet = null;
-			controller.ExitOrbit();
+			controller.ExitOrbit(isClockwise);
 			currentState = States.Flying;	
 		}
 
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour {
 	private void UpdateMovement () {
 		switch (currentState) {
 			case States.Orbiting:
-				controller.Orbit(planet, currentOrbitSpeed);
+				controller.Orbit(planet, currentOrbitSpeed, isClockwise);
 				if (currentOrbitSpeed > minOrbitSpeed) 
 					currentOrbitSpeed -= orbitDecayRate;
 				launchSpeed = currentOrbitSpeed / orbitToSpeedRatio;
@@ -63,6 +64,11 @@ public class Player : MonoBehaviour {
 		if (collider.tag == "Planet") {
 			planet = collider.GetComponent<Planet>();
 			controller.EnterOrbit(planet);
+			if (transform.position.x > planet.transform.position.x) {
+				isClockwise = true;
+			} else {
+				isClockwise = false;
+			}
 			currentState = States.Orbiting;
 			currentOrbitSpeed = maxOrbitSpeed;			
 		}
