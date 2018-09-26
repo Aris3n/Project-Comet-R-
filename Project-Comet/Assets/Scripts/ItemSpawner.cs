@@ -10,18 +10,18 @@ public class ItemSpawner : MonoBehaviour
     private GameObject[] itemPrefabs;
     private int randomSpawnIndex;
     private int randomItemIndex;
-    private int difficultyModifier;
+    private int spawnBehaviorModifier;
 
     public void Start()
     {
-        difficultyModifier = 0;
-		GameManager.DiffcultyUp += IncreaseDifficulty;
+        spawnBehaviorModifier = 0;
+        GameManager.DiffcultyUp += ChangeSpawnBehavior;
         randomItemIndex = Random.Range(0, itemPrefabs.Length);
         randomSpawnIndex = Random.Range(0, spawnPoints.Length);
     }
     public void SpawnItems()
     {
-        switch (difficultyModifier)
+        switch (spawnBehaviorModifier)
         {
             case 1:
                 randomSpawnIndex = Random.Range(0, 2);
@@ -32,18 +32,17 @@ public class ItemSpawner : MonoBehaviour
                 for (int i = 1; i < spawnPoints.Length; i++)
                 {
                     do
-                    {
                         randomIndex = Random.Range(0, spawnPoints.Length);
-                        randomItemIndex = Random.Range(0, itemPrefabs.Length);
-                    } while (randomSpawnIndex == randomIndex);
+                    while (randomSpawnIndex == randomIndex);
+                    randomItemIndex = Random.Range(0, itemPrefabs.Length);
                     randomSpawnIndex = randomIndex;
                     Instantiate(itemPrefabs[randomItemIndex], spawnPoints[randomSpawnIndex].position, Quaternion.identity);
                 }
                 break;
         }
     }
-
-	private void IncreaseDifficulty() {
-        difficultyModifier++;
+    private void ChangeSpawnBehavior()
+    {
+        spawnBehaviorModifier++;
     }
 }

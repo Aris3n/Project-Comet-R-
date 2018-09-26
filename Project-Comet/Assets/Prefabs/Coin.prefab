@@ -90,9 +90,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  movementRanges:
-  - 1.55
+  movementXCoordinates:
   - -1.55
+  - 1.55
+  particle: {fileID: 0}
 --- !u!212 &212727092457132816
 SpriteRenderer:
   m_ObjectHideFlags: 1

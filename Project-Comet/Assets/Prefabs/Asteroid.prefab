@@ -93,10 +93,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0fdb141922d4b349b10f9533baa7b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  movementRanges:
-  - 1.55
+  moveSpeed: 2
+  movementXCoordinates:
   - -1.55
+  - 1.55
+  particle: {fileID: 0}
 --- !u!212 &212845875472359908
 SpriteRenderer:
   m_ObjectHideFlags: 1
