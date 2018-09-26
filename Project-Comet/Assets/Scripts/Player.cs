@@ -6,24 +6,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     public enum States { Flying, Orbiting }
     public States state;
     PlayerController controller;
-    //Planet Related Properties.
     public Planet currentPlanet;
     private float orbitSpeed;
     public float orbitToSpeedRatio;
-    //Movespeed Related Properties.
     private float moveSpeed;
     private float launchSpeed;
     public float moveSpeedDecayRate;
     public ParticleSystem shipTrail;
     public GameObject deathParticlePrefab;
-    //Delegates.
     public delegate void UpdateScore(int value);
     public delegate void PlayerDeath();
-    //Events.
     public static event UpdateScore ScoreUp;
     public static event PlayerDeath FinalizeScore;
 
@@ -31,7 +26,6 @@ public class Player : MonoBehaviour
     {
         shipTrail.startLifetime = size * 1;
     }
-
     private void Start()
     {
         controller = GetComponent<PlayerController>();
@@ -39,7 +33,6 @@ public class Player : MonoBehaviour
         orbitSpeed = currentPlanet.GetMaxOrbitSpeed();
         state = States.Orbiting;
     }
-
     private void Update()
     {
         if (Time.timeScale == 1)
@@ -54,7 +47,6 @@ public class Player : MonoBehaviour
             UpdateMovement();
         }
     }
-
     private void UpdateMovement()
     {
         switch (state)
@@ -78,12 +70,10 @@ public class Player : MonoBehaviour
                 break;
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
         switch (collider.tag)
         {
-
             case "Planet":
                 currentPlanet = collider.GetComponent<Planet>();
                 controller.SetRotationDirection(currentPlanet.transform.position.x);
@@ -103,18 +93,15 @@ public class Player : MonoBehaviour
                 break;
         }
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Planet")
-        {
             Death();
-        }
     }
-
     private void Death()
     {
         Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
         FinalizeScore();
+        Destroy(this.gameObject);
     }
 }
