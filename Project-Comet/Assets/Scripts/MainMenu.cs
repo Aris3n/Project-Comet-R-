@@ -13,12 +13,10 @@ public class MainMenu : MonoBehaviour
     {
         highScoreText.text = highScore.ToString();
     }
-
     public void StartGame()
     {
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
-
     public void QuitGame()
     {
         Application.Quit();

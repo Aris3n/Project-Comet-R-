@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
         {
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && state == States.Orbiting || Input.GetKeyDown(KeyCode.Space) && state == States.Orbiting)
             {
+                currentPlanet.DisableGravityParticle();
                 currentPlanet = null;
                 controller.ExitOrbit();
                 state = States.Flying;

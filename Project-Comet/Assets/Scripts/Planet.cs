@@ -17,7 +17,6 @@ public class Planet : MonoBehaviour
     private float maxGravityParticleSize;
     [SerializeField]
     private float maxGravityParticleLifeTime;
-
     private Renderer renderer;
     [SerializeField]
     private Color[] colors;
@@ -29,7 +28,6 @@ public class Planet : MonoBehaviour
         gravityParticle.startSize = maxGravityParticleSize;
         gravityParticle.startLifetime = maxGravityParticleLifeTime;
     }
-
     public float GetMaxOrbitSpeed()
     {
         return maxOrbitSpeed;
@@ -38,35 +36,32 @@ public class Planet : MonoBehaviour
     {
         return orbitSpeedDecayRate;
     }
-
     public float GetOrbitSpeedPercantage(float orbitSpeed)
     {
         return orbitSpeed / maxOrbitSpeed;
     }
-
     public void SetMaxOrbitSpeed(float speed)
     {
         maxOrbitSpeed = speed;
     }
-
     public void SetMaxOrbitSpeedDecayRate(float rate)
     {
         orbitSpeedDecayRate = rate;
     }
-
     public void DisableEntryPoint()
     {
         GetComponent<CircleCollider2D>().enabled = false;
         orbitRadius = maxOrbitRadius;
     }
-
+    public void DisableGravityParticle() {
+        gravityParticle.Stop();
+    }
     public void GravityDecay(float orbitSpeed)
     {
         orbitRadius = GetOrbitSpeedPercantage(orbitSpeed) * maxOrbitRadius;
         gravityParticle.startSize = GetOrbitSpeedPercantage(orbitSpeed) * maxGravityParticleSize;
         gravityParticle.startLifetime = GetOrbitSpeedPercantage(orbitSpeed) * maxGravityParticleLifeTime;
     }
-
     void OnBecameInvisible()
     {
         Destroy(gameObject);
