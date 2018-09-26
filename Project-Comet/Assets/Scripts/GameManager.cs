@@ -10,12 +10,17 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     private TextMeshProUGUI scoreText;
     private int score;
+    [SerializeField]
+    private int[] scoreMarkers;
     private int highScore;
-
     private Button pauseButton;
     private Button resumeButton;
     private Button replayButton;
     private Button menuButton;
+
+    public delegate void IncreaseDifficulty();
+    public static event IncreaseDifficulty DiffcultyUp;
+    
 
     void Awake()
     {
@@ -130,8 +135,14 @@ public class GameManager : MonoBehaviour
 
     private void AddScore(int value)
     {
-        Debug.Log(value);
         UpdateGameScoreUI(value);
+        for (int i = 0; i < scoreMarkers.Length; i++)
+        {
+            if (score == scoreMarkers[i])
+            {
+                DiffcultyUp();
+            }
+        }
     }
 
     private void SaveScore()

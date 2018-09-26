@@ -10,6 +10,8 @@ TagManager:
   - Boundary
   - HighScore
   - AScore
+  - Coin
+  - Asteroid
   layers:
   - Default
   - TransparentFX

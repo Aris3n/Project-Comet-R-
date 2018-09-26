@@ -82,17 +82,27 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.tag == "Planet")
+        switch (collider.tag)
         {
-            currentPlanet = collider.GetComponent<Planet>();
-            controller.SetRotationDirection(currentPlanet.transform.position.x);
-            controller.EnterOrbit(currentPlanet);
-            ScoreUp(1);
-            state = States.Orbiting;
-            orbitSpeed = currentPlanet.GetMaxOrbitSpeed();
+
+            case "Planet":
+                currentPlanet = collider.GetComponent<Planet>();
+                controller.SetRotationDirection(currentPlanet.transform.position.x);
+                controller.EnterOrbit(currentPlanet);
+                ScoreUp(1);
+                state = States.Orbiting;
+                orbitSpeed = currentPlanet.GetMaxOrbitSpeed();
+                break;
+            case "Coin":
+                ScoreUp(3);
+                break;
+            case "Boundary":
+                Death();
+                break;
+            case "Asteroid":
+                Death();
+                break;
         }
-        else if (collider.tag == "Boundary")
-            Death();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

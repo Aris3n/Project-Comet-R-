@@ -21,7 +21,7 @@ public class PlanetSpawner : MonoBehaviour
         xSpawnOffset = xSpawnOffsets[Random.Range(0, xSpawnOffsets.Length)];
     }
 
-    public void SpawnPlanet()
+    public void SpawnPlanets()
     {
         foreach (Transform spawnPoint in spawnPoints)
         {
@@ -35,6 +35,5 @@ public class PlanetSpawner : MonoBehaviour
             Instantiate(planetPrefab, spawnPosition, Quaternion.identity);
         }
     }
-
     //Add difficulty modifier here with planets that have harder prefabs interms of speed.
 }

@@ -8,17 +8,21 @@ public class CameraFollow : MonoBehaviour
     public Vector3 pointForSpawn;
     public float smoothSpeed = 0.125f;
     public float zOffset;
-    public PlanetSpawner planetSpawner;
+    [SerializeField]
+    private PlanetSpawner planetSpawner;
+    [SerializeField]
+    private ItemSpawner itemSpawner;
+
 
     private void Start()
     {
-        UpdateSpawner();
+        UpdateSpawners();
     }
 
     private void Update()
     {
         if (transform.position.y >= pointForSpawn.y)
-            UpdateSpawner();
+            UpdateSpawners();
     }
 
     private void LateUpdate()
@@ -31,10 +35,11 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    private void UpdateSpawner()
+    private void UpdateSpawners()
     {
         pointForSpawn = planetSpawner.GetSpawnPointPosition(1);
-        planetSpawner.SpawnPlanet();
+        planetSpawner.SpawnPlanets();
+        itemSpawner.SpawnItems();
     }
 
 }
