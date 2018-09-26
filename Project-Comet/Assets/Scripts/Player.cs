@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private float launchSpeed;
     public float moveSpeedDecayRate;
     public ParticleSystem shipTrail;
+    public GameObject deathParticlePrefab;
     CanvasManager canvasManager;
     public CanvasGroup gameOverCanvas;
     //Delegates.
@@ -115,6 +116,7 @@ public class Player : MonoBehaviour
 
     private void Death()
     {
+        Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
         FinalizeScore();
         CanvasGroup gameCanvasGroup = GameObject.Find("GameCanvas").GetComponent<CanvasGroup>();
         canvasManager.ShowCanvas(gameCanvasGroup, gameOverCanvas);

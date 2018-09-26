@@ -1036,6 +1036,7 @@ GameObject:
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
   - component: {fileID: 534669906}
+  - component: {fileID: 534669907}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -1126,6 +1127,18 @@ MonoBehaviour:
   zOffset: -10
   planetSpawner: {fileID: 583868069}
   itemSpawner: {fileID: 1405883518}
+  gameOverCanvas: {fileID: 497279819}
+--- !u!114 &534669907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bccf4a26586e0544b9a1baf9b974231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &583868068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4582831997538438, guid: 660055849a21c734b82b88fcf7f3bf42,
@@ -1531,22 +1544,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &891424556 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1948620435143204, guid: 8326ce0de2ce0774fac9d4f754454b55,
-    type: 2}
-  m_PrefabInternal: {fileID: 2011125060}
---- !u!114 &891424557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 891424556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bccf4a26586e0544b9a1baf9b974231, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &906363701
 GameObject:
   m_ObjectHideFlags: 0
@@ -2916,11 +2913,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1939058326}
   m_CullTransparentMesh: 0
---- !u!198 &1949741192 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198239243983196802, guid: 8326ce0de2ce0774fac9d4f754454b55,
-    type: 2}
-  m_PrefabInternal: {fileID: 2011125060}
 --- !u!1001 &2011125060
 Prefab:
   m_ObjectHideFlags: 0
@@ -2962,29 +2954,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114360180317437308, guid: 8326ce0de2ce0774fac9d4f754454b55,
         type: 2}
-      propertyPath: planet
+      propertyPath: currentPlanet
       value: 
       objectReference: {fileID: 122103567}
-    - target: {fileID: 114360180317437308, guid: 8326ce0de2ce0774fac9d4f754454b55,
-        type: 2}
-      propertyPath: shipTrail
-      value: 
-      objectReference: {fileID: 1949741192}
-    - target: {fileID: 114360180317437308, guid: 8326ce0de2ce0774fac9d4f754454b55,
-        type: 2}
-      propertyPath: canvasGroup
-      value: 
-      objectReference: {fileID: 497279819}
     - target: {fileID: 114360180317437308, guid: 8326ce0de2ce0774fac9d4f754454b55,
         type: 2}
       propertyPath: gameOverCanvas
       value: 
       objectReference: {fileID: 497279819}
-    - target: {fileID: 114360180317437308, guid: 8326ce0de2ce0774fac9d4f754454b55,
-        type: 2}
-      propertyPath: currentPlanet
-      value: 
-      objectReference: {fileID: 122103567}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8326ce0de2ce0774fac9d4f754454b55, type: 2}
   m_IsPrefabAsset: 0
