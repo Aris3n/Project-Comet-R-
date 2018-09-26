@@ -10,6 +10,15 @@ public class PlanetSpawner : MonoBehaviour
     private float[] xSpawnOffsets;
     private float xSpawnOffset;
     public GameObject planetPrefab;
+    [SerializeField]
+    private float baseOrbitSpeed;
+    [SerializeField]
+    private float baseOrbitDecayRate;
+    [SerializeField]
+    private float speedIncreaseValue;
+    [SerializeField]
+    private float speedDecayIncreaseValue;
+
 
     public Vector3 GetSpawnPointPosition(int index)
     {
@@ -18,6 +27,7 @@ public class PlanetSpawner : MonoBehaviour
 
     private void Start()
     {
+        GameManager.DiffcultyUp += IncreaseDifficulty;
         xSpawnOffset = xSpawnOffsets[Random.Range(0, xSpawnOffsets.Length)];
     }
 
@@ -32,8 +42,15 @@ public class PlanetSpawner : MonoBehaviour
             } while (xSpawnOffset == randomSpawnOffset);
             xSpawnOffset = randomSpawnOffset;
             Vector3 spawnPosition = new Vector3(xSpawnOffset, spawnPoint.position.y, spawnPoint.position.z);
-            Instantiate(planetPrefab, spawnPosition, Quaternion.identity);
+            GameObject planet = Instantiate(planetPrefab, spawnPosition, Quaternion.identity);
+
+            planet.GetComponent<Planet>().SetMaxOrbitSpeed(baseOrbitSpeed);
+            planet.GetComponent<Planet>().SetMaxOrbitSpeedDecayRate(baseOrbitDecayRate);
         }
     }
-    //Add difficulty modifier here with planets that have harder prefabs interms of speed.
+
+    private void IncreaseDifficulty() {
+        baseOrbitSpeed += speedIncreaseValue;
+        baseOrbitDecayRate += speedDecayIncreaseValue;
+    }
 }

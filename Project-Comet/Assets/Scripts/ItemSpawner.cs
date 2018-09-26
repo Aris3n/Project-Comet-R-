@@ -14,8 +14,8 @@ public class ItemSpawner : MonoBehaviour
 
     public void Start()
     {
-		//Modifier is set for test purposes.
         difficultyModifier = 0;
+		GameManager.DiffcultyUp += IncreaseDifficulty;
         randomItemIndex = Random.Range(0, itemPrefabs.Length);
         randomSpawnIndex = Random.Range(0, spawnPoints.Length);
     }
@@ -27,8 +27,7 @@ public class ItemSpawner : MonoBehaviour
                 randomSpawnIndex = Random.Range(0, 2);
                 Instantiate(itemPrefabs[randomItemIndex], spawnPoints[randomSpawnIndex].position, Quaternion.identity);
                 break;
-            case 0:
-                Debug.Log("Should Spawn");
+            case 2:
                 int randomIndex = 0;
                 for (int i = 1; i < spawnPoints.Length; i++)
                 {
@@ -42,5 +41,9 @@ public class ItemSpawner : MonoBehaviour
                 }
                 break;
         }
+    }
+
+	private void IncreaseDifficulty() {
+        difficultyModifier++;
     }
 }

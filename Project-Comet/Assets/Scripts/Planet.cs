@@ -27,6 +27,15 @@ public class Planet : MonoBehaviour
         return orbitSpeed / maxOrbitSpeed;
     }
 
+    public void SetMaxOrbitSpeed(float speed)
+    {
+        maxOrbitSpeed = speed;
+    }
+
+    public void SetMaxOrbitSpeedDecayRate(float rate) {
+        orbitSpeedDecayRate = rate;
+    }
+
     public void DisableEntryPoint()
     {
         GetComponent<CircleCollider2D>().enabled = false;

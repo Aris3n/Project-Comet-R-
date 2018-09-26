@@ -1728,6 +1728,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114473854107661606, guid: 6d9379f1afae90c45a4fa2781f251662,
+        type: 2}
+      propertyPath: scoreMarkers.Array.data[1]
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d9379f1afae90c45a4fa2781f251662, type: 2}
   m_IsPrefabAsset: 0
