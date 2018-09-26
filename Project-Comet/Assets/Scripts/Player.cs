@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(PlayerController))]
 
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     public float moveSpeedDecayRate;
     public ParticleSystem shipTrail;
     public GameObject deathParticlePrefab;
+    private AudioSource jumpAudio;
     public delegate void UpdateScore(int value);
     public delegate void PlayerDeath();
     public static event UpdateScore ScoreUp;
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<PlayerController>();
+        jumpAudio = GetComponent<AudioSource>();
         controller.EnterOrbit(currentPlanet);
         orbitSpeed = currentPlanet.GetMaxOrbitSpeed();
         state = States.Orbiting;
@@ -37,12 +40,16 @@ public class Player : MonoBehaviour
     {
         if (Time.timeScale == 1)
         {
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && state == States.Orbiting || Input.GetKeyDown(KeyCode.Space) && state == States.Orbiting)
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                currentPlanet.DisableGravityParticle();
-                currentPlanet = null;
-                controller.ExitOrbit();
-                state = States.Flying;
+                if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) && state == States.Orbiting)
+                {
+                    currentPlanet.DisableGravityParticle();
+                    currentPlanet = null;
+                    controller.ExitOrbit();
+                    state = States.Flying;
+                    jumpAudio.Play();
+                }
             }
             UpdateMovement();
         }

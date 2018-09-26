@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionParticle : MonoBehaviour {
-
-	void Start () 
-	{
-		StartCoroutine(DeployParticle());
-	}
-	
-	IEnumerator DeployParticle()
+public class ExplosionParticle : MonoBehaviour
+{
+    [SerializeField]
+    private float activeTime;
+    void Start()
     {
-        yield return new WaitForSeconds(2.0f);
+        StartCoroutine(DeployParticle());
+    }
+
+    IEnumerator DeployParticle()
+    {
+        yield return new WaitForSeconds(activeTime);
         Destroy(this.gameObject);
     }
 }

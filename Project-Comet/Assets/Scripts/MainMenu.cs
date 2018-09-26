@@ -8,6 +8,7 @@ using TMPro;
 public class MainMenu : MonoBehaviour
 {
     public TextMeshProUGUI highScoreText;
+    public AudioSource buttonAudio;
 
     public void SetHighScoreText(float highScore)
     {
@@ -20,5 +21,10 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void PlayButtonAudio()
+    {
+        buttonAudio.Play();
     }
 }

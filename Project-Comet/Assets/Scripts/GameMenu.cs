@@ -11,6 +11,7 @@ public class GameMenu : MonoBehaviour
     public TextMeshProUGUI[] scoreTexts;
     public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI fHighScoreText;
+    public AudioSource buttonAudio;
     private CanvasManager canvasManager;
 
     private void Start()
@@ -48,11 +49,15 @@ public class GameMenu : MonoBehaviour
     {
         CanvasGroup gameCanvas = transform.GetChild(0).GetComponent<CanvasGroup>();
         CanvasGroup gameOverCanvas = transform.GetChild(2).GetComponent<CanvasGroup>();
-		canvasManager.ShowCanvas(gameCanvas, gameOverCanvas);
+        canvasManager.ShowCanvas(gameCanvas, gameOverCanvas);
     }
     public void ReturnToMenu()
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+    public void PlayButtonAudio()
+    {
+        buttonAudio.Play();
     }
     IEnumerator InitiatePause()
     {
