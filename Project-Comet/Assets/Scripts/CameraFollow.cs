@@ -21,7 +21,7 @@ public class CameraFollow : MonoBehaviour
     private void Start()
     {
         canvasManager = GetComponent<CanvasManager>();
-        Player.FinalizeScore += ShowGameOver;
+        //Player.FinalizeScore += ShowGameOver;
         UpdateSpawners();
     }
 

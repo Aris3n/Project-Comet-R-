@@ -12,6 +12,9 @@ TagManager:
   - AScore
   - Coin
   - Asteroid
+  - WayPointCursor
+  - MainMenu
+  - GameMenu
   layers:
   - Default
   - TransparentFX

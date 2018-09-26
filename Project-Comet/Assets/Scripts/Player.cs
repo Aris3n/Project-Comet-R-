@@ -20,8 +20,6 @@ public class Player : MonoBehaviour
     public float moveSpeedDecayRate;
     public ParticleSystem shipTrail;
     public GameObject deathParticlePrefab;
-    CanvasManager canvasManager;
-    public CanvasGroup gameOverCanvas;
     //Delegates.
     public delegate void UpdateScore(int value);
     public delegate void PlayerDeath();
@@ -37,7 +35,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<PlayerController>();
-        canvasManager = GetComponent<CanvasManager>();
         controller.EnterOrbit(currentPlanet);
         orbitSpeed = currentPlanet.GetMaxOrbitSpeed();
         state = States.Orbiting;
@@ -118,7 +115,5 @@ public class Player : MonoBehaviour
     {
         Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
         FinalizeScore();
-        CanvasGroup gameCanvasGroup = GameObject.Find("GameCanvas").GetComponent<CanvasGroup>();
-        canvasManager.ShowCanvas(gameCanvasGroup, gameOverCanvas);
     }
 }

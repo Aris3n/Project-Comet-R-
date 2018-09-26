@@ -1325,6 +1325,7 @@ GameObject:
   - component: {fileID: 1220978043}
   - component: {fileID: 1220978042}
   - component: {fileID: 1220978041}
+  - component: {fileID: 1220978044}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1392,6 +1393,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1220978044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1220978040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ebdcef5ea25e5419f9a8bc2a7ec174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 1754484085780844, guid: 6d9379f1afae90c45a4fa2781f251662,
+    type: 2}
 --- !u!1 &1266319248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,7 +1482,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1812041087}
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -1689,53 +1703,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1001 &1693144036
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4470578217476604, guid: 6d9379f1afae90c45a4fa2781f251662, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470578217476604, guid: 6d9379f1afae90c45a4fa2781f251662, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470578217476604, guid: 6d9379f1afae90c45a4fa2781f251662, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470578217476604, guid: 6d9379f1afae90c45a4fa2781f251662, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470578217476604, guid: 6d9379f1afae90c45a4fa2781f251662, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470578217476604, guid: 6d9379f1afae90c45a4fa2781f251662, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470578217476604, guid: 6d9379f1afae90c45a4fa2781f251662, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470578217476604, guid: 6d9379f1afae90c45a4fa2781f251662, type: 2}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114473854107661606, guid: 6d9379f1afae90c45a4fa2781f251662,
-        type: 2}
-      propertyPath: scoreMarkers.Array.data[1]
-      value: 10
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6d9379f1afae90c45a4fa2781f251662, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &1812041082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1747,9 +1714,10 @@ GameObject:
   - component: {fileID: 1812041085}
   - component: {fileID: 1812041084}
   - component: {fileID: 1812041083}
+  - component: {fileID: 1812041087}
   m_Layer: 5
-  m_Name: Canvas
-  m_TagString: Untagged
+  m_Name: MasterCanvas
+  m_TagString: MainMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1832,6 +1800,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1812041087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1812041082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603f8c796c3a6384997ca510d356ac47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highScoreText: {fileID: 422633875}
 --- !u!1 &1814276482
 GameObject:
   m_ObjectHideFlags: 0
@@ -2152,7 +2132,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1812041087}
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
